@@ -1,0 +1,254 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="TC Events - Texas College Event Management Platform">
+
+    <title>
+        {% block title %}TC Events{% endblock %}
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="container navbar-container">
+
+
+        <!-- LOGO -->
+
+        <a href="{% url 'home' %}" class="logo">
+
+            TC<span>Events</span>
+
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'event_list' %}">
+                Events
+            </a>
+               
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'my_registrations' %}">
+                My Events
+                </a>
+            {% endif %}
+            
+
+            {% if user.is_authenticated and user.profile.role == 'organizer' %}
+
+                <a href="{% url 'my_events' %}">
+                Manage Events
+                </a>
+
+            {% endif %}
+
+            <a href="{% url 'about' %}">
+                About
+            </a>
+
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
+
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            {% endif %}
+
+        </nav>
+
+
+        <!-- ACTIONS -->
+
+        <div class="nav-actions">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}"
+                   class="profile-link">
+
+                    {{ user.username }}
+
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="btn btn-outline">
+
+                    Logout
+
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}"
+                   class="login-link">
+
+                    Login
+
+                </a>
+
+                <a href="{% url 'register' %}"
+                   class="btn btn-primary">
+
+                    Get Started
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+
+    <div class="container footer-container">
+
+
+        <div class="footer-brand">
+
+            <a href="{% url 'home' %}"
+               class="logo">
+
+                TC<span>Events</span>
+
+            </a>
+
+            <p>
+
+                Discover, organize and experience
+                exciting events at Texas College.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+
+            <div>
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="{% url 'event_list' %}">
+                    Events
+                </a>
+
+                <a href="#">
+                    Categories
+                </a>
+
+                <a href="#">
+                    Organizers
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h4>
+                    Company
+                </h4>
+
+                <a href="{% url 'about' %}">
+                    About
+                </a>
+
+                <a href="{% url 'contact' %}">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <p>
+
+            © 2026 TC Events.
+            Texas College Student Project.
+
+        </p>
+
+    </div>
+
+
+</footer>
+
+
+{% block extra_js %}
+{% endblock %}
+
+
+</body>
+
+</html>

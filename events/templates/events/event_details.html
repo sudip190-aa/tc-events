@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ event.title }} — TC Events
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'events/css/events.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="event-detail-page">
+    <div class="container">
+        <a href="{% url 'event_list' %}" class="back-link">
+            ← Back to Events
+        </a>
+
+        <div class="event-detail-grid">
+            <div>
+                <div class="detail-image">
+                    {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    {% else %}
+                    <div class="detail-placeholder">
+                        {{ event.category.icon|default:"🎓" }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="detail-content">
+                <span class="event-category-large">
+                    {{ event.category.icon }}
+                    {{ event.category.name }}
+                </span>
+
+                <h1>{{ event.title }}</h1>
+
+                <p class="detail-description">
+                    {{ event.description }}
+                </p>
+
+                <div class="detail-info">
+                    <div class="info-item">
+                        <span>📅</span>
+                        <div>
+                            <strong>Date</strong>
+                            <p>{{ event.event_date|date:"l, F d, Y" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🕐</span>
+                        <div>
+                            <strong>Time</strong>
+                            <p>{{ event.start_time|time:"g:i A" }} - {{ event.end_time|time:"g:i A" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span>📍</span>
+                        <div>
+                            <strong>Venue</strong>
+                            <p>{{ event.venue }}</p>
+                            {% if event.address %}
+                            <small>{{ event.address }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span>👥</span>
+                        <div>
+                            <strong>Availability</strong>
+                            <p>{{ event.spots_left }} spots remaining</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-action">
+                    <div class="registration-card">
+                        <h3>🎟️ Event Registration</h3>
+
+                        <div class="registration-info">
+                            <div class="registration-stat">
+                                <span class="stat-icon">👥</span>
+                                <div>
+                                    <strong>{{ event.spots_left }}</strong>
+                                    <small>Spots Remaining</small>
+                                </div>
+                            </div>
+
+                            {% if event.registration_deadline %}
+                            <div class="registration-stat">
+                                <span class="stat-icon">⏰</span>
+                                <div>
+                                    <strong>{{ event.registration_deadline|date:"M d, Y" }}</strong>
+                                    <small>Registration Deadline</small>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        {% if user.is_authenticated %}
+                            {% if event.registration_deadline and event.registration_deadline < now %}
+                                <button class="btn btn-outline btn-large" disabled>
+                                    Registration Closed
+                                </button>
+                            {% else %}
+                                {% with user_registration=event.registrations.all %}
+                                <form method="POST" action="{% url 'register_event' event.slug %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-large">
+                                        🎟️ Register for Event
+                                    </button>
+                                </form>
+                                {% endwith %}
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-primary btn-large">
+                                🔐 Login to Register
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <p class="organizer-info">
+                        Organized by
+                        <strong>{{ event.organizer.get_full_name|default:event.organizer.username }}</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,277 @@
+{% extends 'base.html' %} {% load static %} {% block title %} TC Events — Texas
+College {% endblock %} {% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'core/css/home.css' %}" />
+
+{% endblock %} {% block content %}
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 Official Texas College Event Platform</div>
+
+      <h1>
+        Discover what's happening
+
+        <span> at Texas College. </span>
+      </h1>
+
+      <p>
+        Discover workshops, seminars, hackathons, sports, cultural programs and
+        exciting events happening across Texas College.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="{% url 'event_list' %}" class="btn btn-primary btn-large"> Explore TC Events </a>
+
+        <a href="{% url 'create_event' %}" class="btn btn-outline btn-large"> Create an Event </a>
+      </div>
+    </div>
+
+    <!-- HERO VISUAL -->
+
+    <div class="hero-visual">
+      <div class="floating-card card-one">
+        <span> 🎓 </span>
+
+        <div>
+          <strong> College Events </strong>
+
+          <small> Discover what's happening </small>
+        </div>
+      </div>
+
+      <div class="event-preview">
+        <div class="event-image">🎤</div>
+
+        <div class="event-preview-content">
+          <small> UPCOMING EVENT </small>
+
+          <h3>Texas College Tech Summit</h3>
+
+          <p>📅 August 20, 2026</p>
+
+          <p>📍 Texas College</p>
+
+          <div class="event-footer">
+            <span> 👥 84 attending </span>
+
+            <span class="status"> Open </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-card card-two">
+        <span> ✨ </span>
+
+        <div>
+          <strong> Join the community </strong>
+
+          <small> Connect & learn </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat">
+      <strong> 50+ </strong>
+
+      <span> College Events </span>
+    </div>
+
+    <div class="stat">
+      <strong> 1K+ </strong>
+
+      <span> Students </span>
+    </div>
+
+    <div class="stat">
+      <strong> 30+ </strong>
+
+      <span> Organizers </span>
+    </div>
+
+    <div class="stat">
+      <strong> 15+ </strong>
+
+      <span> Event Categories </span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories section">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow"> EXPLORE </span>
+
+        <h2>Find something you love.</h2>
+      </div>
+
+      <a href="#" class="view-all"> View all → </a>
+    </div>
+
+    <div class="category-grid">
+      <a href="#" class="category-card">
+        <div class="category-icon">💻</div>
+
+        <h3>Technology</h3>
+
+        <p>Workshops, hackathons and tech events</p>
+      </a>
+
+      <a href="#" class="category-card">
+        <div class="category-icon">🎨</div>
+
+        <h3>Arts & Culture</h3>
+
+        <p>Cultural programs and creative events</p>
+      </a>
+
+      <a href="#" class="category-card">
+        <div class="category-icon">⚽</div>
+
+        <h3>Sports</h3>
+
+        <p>Tournaments and college competitions</p>
+      </a>
+
+      <a href="#" class="category-card">
+        <div class="category-icon">🎓</div>
+
+        <h3>Academic</h3>
+
+        <p>Seminars, workshops and conferences</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHY TC EVENTS ================= -->
+
+<section class="why-evently section">
+  <div class="container why-grid">
+    <div class="why-content">
+      <span class="eyebrow"> WHY TC EVENTS? </span>
+
+      <h2>Everything happening at Texas College, in one place.</h2>
+
+      <p>
+        TC Events makes it easy for Texas College students to discover, register
+        for and participate in events happening across campus.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <span> ✓ </span>
+
+          <div>
+            <h3>Discover Easily</h3>
+
+            <p>Find events based on your interests.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <span> ✓ </span>
+
+          <div>
+            <h3>Register Instantly</h3>
+
+            <p>Reserve your spot with a few clicks.</p>
+          </div>
+        </div>
+
+        <div class="feature">
+          <span> ✓ </span>
+
+          <div>
+            <h3>Never Miss an Event</h3>
+
+            <p>Keep your events and tickets organized.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual">
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <strong> My Events </strong>
+
+          <span> 2026 </span>
+        </div>
+
+        <div class="mini-event">
+          <div class="date-box">
+            <strong> 20 </strong>
+
+            <small> AUG </small>
+          </div>
+
+          <div>
+            <strong> Python Workshop </strong>
+
+            <small> 10:00 AM · Room 204 </small>
+          </div>
+        </div>
+
+        <div class="mini-event">
+          <div class="date-box">
+            <strong> 25 </strong>
+
+            <small> AUG </small>
+          </div>
+
+          <div>
+            <strong> Hackathon 2026 </strong>
+
+            <small> 9:00 AM · Main Hall </small>
+          </div>
+        </div>
+
+        <div class="mini-event">
+          <div class="date-box">
+            <strong> 30 </strong>
+
+            <small> AUG </small>
+          </div>
+
+          <div>
+            <strong> Sports Day </strong>
+
+            <small> 8:00 AM · College Ground </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+  <div class="container cta-content">
+    <span class="eyebrow"> GET STARTED </span>
+
+    <h2>Make your campus experience unforgettable.</h2>
+
+    <p>
+      Discover events, connect with students and make the most of your Texas
+      College experience.
+    </p>
+
+    <a href="{% url 'create_event' %}" class="btn btn-light btn-large"> Join TC Events → </a>
+  </div>
+</section>
+
+{% endblock %}

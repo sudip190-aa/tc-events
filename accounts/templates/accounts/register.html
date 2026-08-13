@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create Account — TC Events
+{% endblock %}
+
+
+{% block extra_css %}
+
+{% load static %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/auth.css' %}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-card register-card">
+
+
+        <div class="auth-header">
+
+            <span class="auth-icon">
+                🎓
+            </span>
+
+            <h1>
+                Join TC Events
+            </h1>
+
+            <p>
+                Create your Texas College account.
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            {% for field in form %}
+
+            <div class="form-group">
+
+                <label>
+                    {{ field.label }}
+                </label>
+
+                {{ field }}
+
+
+                {% if field.errors %}
+
+                <div class="field-error">
+
+                    {{ field.errors }}
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+
+            <button
+                type="submit"
+                class="btn btn-primary auth-button">
+
+                Create Account
+
+            </button>
+
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

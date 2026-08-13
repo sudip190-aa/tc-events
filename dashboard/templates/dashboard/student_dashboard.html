@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Student Dashboard — TC Events
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'dashboard/css/dashboard.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    STUDENT PORTAL
+                </span>
+
+                <h1>
+                    Welcome back,
+                    {{ user.first_name|default:user.username }} 👋
+                </h1>
+
+                <p>
+                    Discover events, manage your registrations
+                    and keep your campus life active.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'event_list' %}"
+                class="btn btn-primary">
+
+                Explore Events
+
+            </a>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎟️
+                </div>
+
+                <div>
+
+                    <span>
+                        REGISTERED
+                    </span>
+
+                    <strong>
+                        {{ active_registrations.count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <span>
+                        UPCOMING
+                    </span>
+
+                    <strong>
+                        {{ upcoming_events|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        ATTENDED
+                    </span>
+
+                    <strong>
+                        {{ attended_events }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- UPCOMING EVENTS -->
+
+        <div class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        YOUR SCHEDULE
+                    </span>
+
+                    <h2>
+                        Upcoming Events
+                    </h2>
+
+                </div>
+
+
+                <a
+                    href="{% url 'my_registrations' %}"
+                    class="text-link">
+
+                    View all →
+
+                </a>
+
+            </div>
+
+
+            {% if upcoming_events %}
+
+
+            <div class="dashboard-event-list">
+
+
+                {% for registration in upcoming_events %}
+
+
+                <div class="dashboard-event-card">
+
+
+                    <div class="event-date">
+
+                        <span>
+                            {{ registration.event.event_date|date:"M" }}
+                        </span>
+
+                        <strong>
+                            {{ registration.event.event_date|date:"d" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="event-main">
+
+                        <span class="event-category">
+
+                            {{ registration.event.category.name }}
+
+                        </span>
+
+                        <h3>
+                            {{ registration.event.title }}
+                        </h3>
+
+                        <p>
+
+                            📍 {{ registration.event.venue }}
+
+                            &nbsp; • &nbsp;
+
+                            🕐 {{ registration.event.start_time|time:"g:i A" }}
+
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'ticket_detail' registration.ticket_id %}"
+                        class="btn btn-outline">
+
+                        Ticket
+
+                    </a>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="dashboard-empty">
+
+                <span>
+                    🎟️
+                </span>
+
+                <h3>
+                    No upcoming events
+                </h3>
+
+                <p>
+                    Find something interesting happening
+                    around campus.
+                </p>
+
+                <a
+                    href="{% url 'event_list' %}"
+                    class="btn btn-primary">
+
+                    Explore Events
+
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        QUICK ACTIONS
+                    </span>
+
+                    <h2>
+                        What would you like to do?
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="{% url 'event_list' %}"
+                    class="quick-card">
+
+                    <span>
+                        🔎
+                    </span>
+
+                    <strong>
+                        Find Events
+                    </strong>
+
+                    <small>
+                        Discover what's happening
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="{% url 'my_registrations' %}"
+                    class="quick-card">
+
+                    <span>
+                        🎟️
+                    </span>
+
+                    <strong>
+                        My Tickets
+                    </strong>
+
+                    <small>
+                        View your event tickets
+                    </small>
+
+                </a>
+
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="quick-card">
+
+                    <span>
+                        👤
+                    </span>
+
+                    <strong>
+                        My Profile
+                    </strong>
+
+                    <small>
+                        Manage your account
+                    </small>
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

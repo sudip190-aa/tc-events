@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+Cancel Registration — TC Events
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="auth-page">
+
+
+    <div class="auth-card">
+
+
+        <div class="auth-header">
+
+            <span class="auth-icon">
+                ⚠️
+            </span>
+
+            <h1>
+                Cancel Registration?
+            </h1>
+
+            <p>
+
+                Are you sure you want to cancel your
+                registration for
+
+                <strong>
+                    {{ registration.event.title }}
+                </strong>?
+
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <button
+                type="submit"
+                class="btn btn-primary auth-button">
+
+                Yes, Cancel Registration
+
+            </button>
+
+
+            <a
+                href="{% url 'ticket_detail' registration.ticket_id %}"
+                class="btn btn-outline auth-button">
+
+                Keep My Ticket
+
+            </a>
+
+        </form>
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}

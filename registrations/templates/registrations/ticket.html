@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+
+Digital Ticket — {{ registration.event.title }}
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'registrations/css/registrations.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="ticket-page">
+
+
+    <div class="container">
+
+
+        <div class="ticket-wrapper">
+
+
+            <div class="ticket-success">
+
+                <span>
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Registration Confirmed
+                    </strong>
+
+                    <p>
+                        Your ticket is ready.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="digital-ticket">
+
+
+                <div class="ticket-top">
+
+
+                    <div>
+
+                        <span class="ticket-brand">
+                            TC EVENTS
+                        </span>
+
+                        <h1>
+                            {{ registration.event.title }}
+                        </h1>
+
+                    </div>
+
+
+                    <span class="
+                        ticket-status
+                        status-{{ registration.status }}">
+
+                        {{ registration.get_status_display }}
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="ticket-divider">
+                </div>
+
+
+                <div class="ticket-details">
+
+
+                    <div>
+
+                        <span>
+                            ATTENDEE
+                        </span>
+
+                        <strong>
+
+                            {{ registration.attendee.get_full_name|default:registration.attendee.username }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            DATE
+                        </span>
+
+                        <strong>
+
+                            {{ registration.event.event_date|date:"M d, Y" }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            TIME
+                        </span>
+
+                        <strong>
+
+                            {{ registration.event.start_time|time:"g:i A" }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            VENUE
+                        </span>
+
+                        <strong>
+
+                            {{ registration.event.venue }}
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="ticket-qr">
+
+
+                    <img
+                        src="{% url 'ticket_qr' registration.ticket_id %}"
+                        alt="Ticket QR Code">
+
+
+                    <p>
+                        Scan this QR code at the event.
+                    </p>
+
+
+                </div>
+
+
+                <div class="ticket-id">
+
+                    <span>
+                        TICKET ID
+                    </span>
+
+                    <strong>
+
+                        {{ registration.ticket_id }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="ticket-actions">
+
+                <a
+                    href="{% url 'my_registrations' %}"
+                    class="btn btn-outline">
+
+                    ← My Events
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

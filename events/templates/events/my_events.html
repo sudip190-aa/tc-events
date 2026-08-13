@@ -1,0 +1,86 @@
+{% extends 'base.html' %} {% load static %} {% block title %} My Events — TC
+Events {% endblock %} {% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'events/css/my_events.css' %}" />
+
+{% endblock %} {% block content %}
+
+<section class="events-page">
+  <div class="container">
+    <div class="events-header">
+      <div>
+        <span class="eyebrow"> ORGANIZER </span>
+
+        <h1>My Events</h1>
+
+        <p>Manage the events you've created.</p>
+      </div>
+
+      <a href="{% url 'create_event' %}" class="btn btn-primary">
+        + Create Event
+      </a>
+    </div>
+
+    {% if events %}
+
+    <div class="organizer-events">
+      {% for event in events %}
+
+      <div class="organizer-event-card">
+        <div class="organizer-event-main">
+          <div class="organizer-event-image">
+            {% if event.image %}
+
+            <img src="{{ event.image.url }}" alt="{{ event.title }}" />
+
+            {% else %} {{ event.category.icon }} {% endif %}
+          </div>
+
+          <div>
+            <span class="status-badge status-{{ event.status }}">
+              {{ event.get_status_display }}
+            </span>
+
+            <h3>{{ event.title }}</h3>
+
+            <p>
+              📅 {{ event.event_date|date:"M d, Y" }} · 📍 {{ event.venue }}
+            </p>
+          </div>
+        </div>
+
+        <div class="organizer-actions">
+          <a href="{% url 'event_detail' event.slug %}"> View </a>
+
+          <a href="{% url 'edit_event' event.slug %}"> Edit </a>
+
+          <a href="{% url 'delete_event' event.slug %}" class="delete-link">
+            Delete
+          </a>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <div class="empty-events">
+      <div>📅</div>
+
+      <h2>You haven't created any events.</h2>
+
+      <p>Create your first event and share it with Texas College students.</p>
+
+      <br />
+
+      <a href="{% url 'create_event' %}" class="btn btn-primary">
+        Create Your First Event
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

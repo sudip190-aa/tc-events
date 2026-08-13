@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+My Registrations — TC Events
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'registrations/css/registrations.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="my-registrations-page">
+    <div class="container">
+
+        <h1>My Registrations</h1>
+
+        {% if registrations %}
+        <div class="registration-list">
+
+            {% for registration in registrations %}
+            <div class="registration-card">
+
+                <div class="registration-header">
+                    <span class="event-category">
+                        {{ registration.event.category.icon|default:"🎓" }}
+                        {{ registration.event.category.name }}
+                    </span>
+                    <span class="registration-status status-{{ registration.status }}">
+                        {{ registration.get_status_display }}
+                    </span>
+                </div>
+
+                <h2>
+                    <a href="{% url 'event_detail' registration.event.slug %}">
+                        {{ registration.event.title }}
+                    </a>
+                </h2>
+
+                <div class="event-meta">
+                    <span>📅 {{ registration.event.event_date|date:"l, F d, Y" }}</span>
+                    <span>🕐 {{ registration.event.start_time|time:"g:i A" }} - {{ registration.event.end_time|time:"g:i A" }}</span>
+                    <span>📍 {{ registration.event.venue }}</span>
+                </div>
+
+                <div class="registration-actions">
+                    <a href="{% url 'ticket_detail' registration.ticket_id %}"
+                       class="btn btn-primary">
+                        View Ticket
+                    </a>
+
+                    {% if registration.is_active %}
+                    <form method="POST"
+                          action="{% url 'cancel_registration' registration.ticket_id %}"
+                          class="cancel-form"
+                          onsubmit="return confirm('Are you sure you want to cancel this registration?');">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="btn btn-outline">
+                            Cancel Registration
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+
+                <p class="registration-date">
+                    Registered on {{ registration.registered_at|date:"M d, Y g:i A" }}
+                </p>
+
+            </div>
+            {% endfor %}
+
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>You haven't registered for any events yet.</p>
+            <a href="{% url 'event_list' %}" class="btn btn-primary">
+                Browse Events
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock %}

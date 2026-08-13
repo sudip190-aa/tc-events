@@ -1,0 +1,453 @@
+/* =========================================================
+   TC EVENTS — ABOUT
+   ========================================================= */
+
+.about-hero {
+    position: relative;
+
+    padding: 110px 0 100px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(108, 92, 231, 0.15),
+            transparent 35%
+        ),
+        #faf9fc;
+}
+
+
+.about-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    top: -220px;
+    right: -150px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(108, 92, 231, 0.08);
+
+    filter: blur(5px);
+}
+
+
+.about-hero-content {
+    position: relative;
+
+    max-width: 800px;
+}
+
+
+.about-label,
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #6c5ce7;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+.about-hero h1 {
+    margin: 0;
+
+    color: #171522;
+
+    font-size: clamp(45px, 7vw, 76px);
+
+    font-weight: 900;
+
+    line-height: 1.02;
+
+    letter-spacing: -4px;
+}
+
+
+.about-hero h1 span {
+    display: block;
+
+    color: #6c5ce7;
+}
+
+
+.about-hero p {
+    max-width: 650px;
+
+    margin-top: 28px;
+
+    color: #6d6977;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.about-intro {
+    padding: 110px 0;
+}
+
+
+.about-intro .container {
+    width: min(1150px, calc(100% - 40px));
+
+    margin: auto;
+}
+
+
+.about-grid {
+    display: grid;
+
+    grid-template-columns: 1.1fr 0.9fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+
+.about-text h2,
+.section-heading h2,
+.mission-box h2 {
+    margin: 0;
+
+    color: #171522;
+
+    font-size: clamp(32px, 4vw, 48px);
+
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    letter-spacing: -2px;
+}
+
+
+.about-text p {
+    margin-top: 22px;
+
+    color: #716d7a;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   HIGHLIGHT CARDS
+   ========================================================= */
+
+.about-highlight {
+    display: grid;
+
+    gap: 18px;
+}
+
+
+.highlight-card {
+    padding: 28px;
+
+    border: 1px solid #e9e6f1;
+
+    border-radius: 22px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 35px
+        rgba(30, 25, 55, 0.05);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.highlight-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(30, 25, 55, 0.09);
+}
+
+
+.highlight-icon,
+.feature-icon {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 18px;
+
+    border-radius: 15px;
+
+    background: #f0edff;
+
+    font-size: 24px;
+}
+
+
+.highlight-card h3,
+.feature-card h3 {
+    margin: 0 0 9px;
+
+    color: #1b1925;
+
+    font-size: 19px;
+}
+
+
+.highlight-card p,
+.feature-card p {
+    margin: 0;
+
+    color: #777381;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.about-features {
+    padding: 100px 0;
+
+    background: #f5f3f9;
+}
+
+
+.about-features .container {
+    width: min(1150px, calc(100% - 40px));
+
+    margin: auto;
+}
+
+
+.section-heading {
+    max-width: 650px;
+
+    margin-bottom: 50px;
+}
+
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+.feature-card {
+    padding: 28px;
+
+    border: 1px solid #e7e3ee;
+
+    border-radius: 20px;
+
+    background: white;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.feature-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(35, 28, 65, 0.08);
+}
+
+
+/* =========================================================
+   MISSION
+   ========================================================= */
+
+.about-mission {
+    padding: 100px 0;
+}
+
+
+.about-mission .container {
+    width: min(950px, calc(100% - 40px));
+
+    margin: auto;
+}
+
+
+.mission-box {
+    padding: 70px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #171522,
+            #211c31
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(20, 17, 30, 0.18);
+}
+
+
+.mission-box h2 {
+    color: white;
+}
+
+
+.mission-box p {
+    max-width: 650px;
+
+    margin: 22px auto 0;
+
+    color: #bdb8ca;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+.about-hero-content,
+.about-text,
+.highlight-card,
+.feature-card,
+.mission-box {
+    animation: aboutReveal 0.7s ease both;
+}
+
+
+.highlight-card:nth-child(2) {
+    animation-delay: 0.12s;
+}
+
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.08s;
+}
+
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.16s;
+}
+
+
+.feature-card:nth-child(4) {
+    animation-delay: 0.24s;
+}
+
+
+@keyframes aboutReveal {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .about-grid {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+
+    .feature-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .about-hero {
+        padding: 75px 0;
+    }
+
+
+    .about-hero h1 {
+        font-size: 45px;
+
+        letter-spacing: -2.5px;
+    }
+
+
+    .about-intro,
+    .about-features,
+    .about-mission {
+        padding: 70px 0;
+    }
+
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .mission-box {
+        padding: 45px 25px;
+
+        border-radius: 22px;
+    }
+
+}

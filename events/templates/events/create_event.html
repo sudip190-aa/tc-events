@@ -1,0 +1,293 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+
+{% if editing %}
+Edit Event
+{% else %}
+Create Event
+{% endif %}
+
+— TC Events
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'events/css/events.css' %}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<section class="create-event-page">
+
+
+    <div class="container">
+
+
+        <div class="form-page-header">
+
+            <span class="eyebrow">
+                ORGANIZER
+            </span>
+
+            <h1>
+
+                {% if editing %}
+                Edit Your Event
+                {% else %}
+                Create an Event
+                {% endif %}
+
+            </h1>
+
+            <p>
+
+                Share your event with the
+                Texas College community.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="event-form-card">
+
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+
+                {% if form.non_field_errors %}
+
+                <div class="error-message">
+
+                    {{ form.non_field_errors }}
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="form-section">
+
+                    <h2>
+                        Event Information
+                    </h2>
+
+                    <p>
+                        Tell students about your event.
+                    </p>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Event Title
+                            </label>
+
+                            {{ form.title }}
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Description
+                            </label>
+
+                            {{ form.description }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Category
+                            </label>
+
+                            {{ form.category }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Event Image
+                            </label>
+
+                            {{ form.image }}
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-section">
+
+                    <h2>
+                        Date & Location
+                    </h2>
+
+                    <p>
+                        When and where will it happen?
+                    </p>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Date
+                            </label>
+
+                            {{ form.event_date }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Start Time
+                            </label>
+
+                            {{ form.start_time }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                End Time
+                            </label>
+
+                            {{ form.end_time }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Registration Deadline
+                            </label>
+
+                            {{ form.registration_deadline }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Venue
+                            </label>
+
+                            {{ form.venue }}
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Address
+                            </label>
+
+                            {{ form.address }}
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-section">
+
+                    <h2>
+                        Registration
+                    </h2>
+
+                    <p>
+                        Set how many students can attend.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Maximum Capacity
+                        </label>
+
+                        {{ form.capacity }}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-actions">
+
+                    <a href="{% url 'my_events' %}"
+                       class="btn btn-outline">
+
+                        Cancel
+
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+
+                        {% if editing %}
+                        Update Event
+                        {% else %}
+                        Submit Event
+                        {% endif %}
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

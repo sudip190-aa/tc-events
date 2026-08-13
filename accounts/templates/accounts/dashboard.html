@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{{ dashboard_type }} Dashboard —
+TC Events
+
+{% endblock %}
+
+
+{% block extra_css %}
+
+{% load static %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/dashboard.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <div class="dashboard-welcome">
+
+            <span class="eyebrow">
+                TC EVENTS
+            </span>
+
+            <h1>
+                Welcome,
+                {{ user.profile.full_name|default:user.username }}!
+            </h1>
+
+            <p>
+                You are logged in as a
+                <strong>
+                    {{ dashboard_type }}
+                </strong>.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+
+            <div class="dashboard-box">
+
+                <span>
+                    📅
+                </span>
+
+                <h3>
+                    My Events
+                </h3>
+
+                <p>
+                    View events you've registered for.
+                </p>
+
+                <a href="{% url 'my_events' %}">
+                    View Events →
+                </a>
+
+            </div>
+
+
+
+            {% if user.profile.role == 'organizer' %}
+
+            <div class="dashboard-box">
+
+                <span>
+                    ✨
+                </span>
+
+                <h3>
+                    Create Event
+                </h3>
+
+                <p>
+                    Create and manage college events.
+                </p>
+
+                <a href="{% url 'create_event' %}">
+                    Create Event →
+                </a>
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if user.profile.role == 'admin' %}
+
+            <div class="dashboard-box">
+
+                <span>
+                    ⚙️
+                </span>
+
+                <h3>
+                    Manage Platform
+                </h3>
+
+                <p>
+                    Manage users and college events.
+                </p>
+
+                <a href="/admin/">
+                    Admin Panel →
+                </a>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="dashboard-box">
+
+                <span>
+                    👤
+                </span>
+
+                <h3>
+                    My Profile
+                </h3>
+
+                <p>
+                    Update your personal information.
+                </p>
+
+                <a href="{% url 'profile' %}">
+                    Edit Profile →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

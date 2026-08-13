@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Profile — TC Events
+{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet"
+      href="{% static 'accounts/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+    <div class="profile-card">
+        <div class="profile-header">
+            <span class="profile-icon">👤</span>
+            <h1>My Profile</h1>
+            <p>Manage your TC Events profile.</p>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="field-error">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary profile-button">
+                Save Changes
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,214 @@
+/* ================= MY EVENTS PAGE ================= */
+
+.my-events-page {
+    padding: 80px 0;
+}
+
+
+/* ================= HEADER ================= */
+
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 40px;
+}
+
+
+.events-header h1 {
+    font-size: 48px;
+    letter-spacing: -2px;
+    margin: 8px 0;
+}
+
+
+.events-header p {
+    color: var(--muted);
+}
+
+
+/* ================= ORGANIZER EVENTS ================= */
+
+.organizer-events {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.organizer-event-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+
+.organizer-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(45, 35, 80, 0.08);
+}
+
+
+.organizer-event-main {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.organizer-event-image {
+    width: 75px;
+    height: 75px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eeebff;
+    font-size: 30px;
+    flex-shrink: 0;
+}
+
+
+.organizer-event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.organizer-event-main h3 {
+    margin: 8px 0 5px;
+    font-size: 18px;
+}
+
+
+.organizer-event-main p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* ================= STATUS BADGES ================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+
+.status-pending {
+    background: #fff5db;
+    color: #a96b00;
+}
+
+
+.status-published {
+    background: #e6f8ee;
+    color: #23864d;
+}
+
+
+.status-draft {
+    background: #eeeeee;
+    color: #666;
+}
+
+
+.status-cancelled {
+    background: #ffe8e8;
+    color: #c0392b;
+}
+
+
+.status-completed {
+    background: #e8edff;
+    color: #4055b8;
+}
+
+
+/* ================= ACTIONS ================= */
+
+.organizer-actions {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.organizer-actions a {
+    color: var(--primary);
+    transition: 0.2s ease;
+}
+
+
+.organizer-actions a:hover {
+    color: var(--primary-dark);
+}
+
+
+.organizer-actions .delete-link {
+    color: #c0392b;
+}
+
+
+.organizer-actions .delete-link:hover {
+    color: #a93226;
+}
+
+
+/* ================= EMPTY STATE ================= */
+
+.empty-events {
+    text-align: center;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 80px 20px;
+}
+
+
+.empty-events > div {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+
+.empty-events p {
+    color: var(--muted);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+    .organizer-event-card {
+        align-items: flex-start;
+        gap: 20px;
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 650px) {
+    .events-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .events-header h1 {
+        font-size: 38px;
+    }
+}

@@ -1,0 +1,207 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Admin Dashboard —
+TC Events {% endblock %} {% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}" />
+
+{% endblock %} {% block content %}
+
+<section class="dashboard-page">
+  <div class="container">
+    <!-- HEADER -->
+
+    <div class="dashboard-header">
+      <div>
+        <span class="eyebrow"> ADMINISTRATION </span>
+
+        <h1>TC Events Control Center</h1>
+
+        <p>Monitor the entire college event platform.</p>
+      </div>
+
+      <a href="/admin/" class="btn btn-primary"> Django Admin </a>
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+
+        <div>
+          <span> USERS </span>
+
+          <strong> {{ total_users }} </strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🎪</div>
+
+        <div>
+          <span> EVENTS </span>
+
+          <strong> {{ total_events }} </strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+
+        <div>
+          <span> PENDING </span>
+
+          <strong> {{ pending_events }} </strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🎟️</div>
+
+        <div>
+          <span> REGISTRATIONS </span>
+
+          <strong> {{ total_registrations }} </strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+
+        <div>
+          <span> ATTENDANCE </span>
+
+          <strong> {{ total_attendance }} </strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENDING APPROVALS -->
+
+    <div class="dashboard-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow"> MODERATION </span>
+
+          <h2>Event Approvals</h2>
+        </div>
+      </div>
+
+      <div class="approval-list">
+        {% for event in pending_event_list %}
+
+        <div class="approval-card">
+          <div class="approval-icon">🎪</div>
+
+          <div class="approval-content">
+            <span> {{ event.category.name }} </span>
+
+            <h3>{{ event.title }}</h3>
+
+            <p>
+              Organized by
+              <strong>
+                {{
+                event.organizer.get_full_name|default:event.organizer.username
+                }}
+              </strong>
+
+              • {{ event.event_date|date:"M d, Y" }}
+            </p>
+          </div>
+
+          <div class="approval-actions">
+            <a
+              href="{% url 'event_detail' event.slug %}"
+              class="btn btn-outline"
+            >
+              Review
+            </a>
+
+            <a
+              href="{% url 'approve_event' event.id %}"
+              class="btn btn-success"
+            >
+              ✓ Approve
+            </a>
+
+            <a href="{% url 'reject_event' event.id %}" class="btn btn-danger">
+              Reject
+            </a>
+          </div>
+        </div>
+
+        {% empty %}
+
+        <div class="dashboard-empty">
+          <span> ✓ </span>
+
+          <h3>All caught up!</h3>
+
+          <p>There are no events waiting for approval.</p>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- RECENT EVENTS -->
+
+    <div class="dashboard-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow"> PLATFORM ACTIVITY </span>
+
+          <h2>Recent Events</h2>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="dashboard-table">
+          <thead>
+            <tr>
+              <th>Event</th>
+
+              <th>Organizer</th>
+
+              <th>Date</th>
+
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for event in recent_events %}
+
+            <tr>
+              <td>
+                <strong> {{ event.title }} </strong>
+              </td>
+
+              <td>
+                {{
+                event.organizer.get_full_name|default:event.organizer.username
+                }}
+              </td>
+
+              <td>{{ event.event_date|date:"M d, Y" }}</td>
+
+              <td>
+                <span
+                  class="
+                                    table-status
+                                    status-{{ event.status }}"
+                >
+                  {{ event.get_status_display }}
+                </span>
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

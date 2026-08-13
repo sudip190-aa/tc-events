@@ -1,0 +1,403 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Organizer Dashboard — TC Events
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'dashboard/css/dashboard.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    ORGANIZER PORTAL
+                </span>
+
+                <h1>
+                    Organizer Dashboard
+                </h1>
+
+                <p>
+                    Manage your college events and track
+                    attendee activity.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'create_event' %}"
+                class="btn btn-primary">
+
+                + Create Event
+
+            </a>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎪
+                </div>
+
+                <div>
+
+                    <span>
+                        TOTAL EVENTS
+                    </span>
+
+                    <strong>
+                        {{ total_events }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <span>
+                        PUBLISHED
+                    </span>
+
+                    <strong>
+                        {{ published_events }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        PENDING
+                    </span>
+
+                    <strong>
+                        {{ pending_events }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+
+                    <span>
+                        REGISTRATIONS
+                    </span>
+
+                    <strong>
+                        {{ total_registrations }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- EVENTS -->
+
+        <div class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        EVENT MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Your Events
+                    </h2>
+
+                </div>
+
+
+                <a
+                    href="{% url 'my_events' %}"
+                    class="text-link">
+
+                    Manage all →
+
+                </a>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+
+                <table class="dashboard-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Event
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Capacity
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    {% for event in recent_events %}
+
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+                                    {{ event.title }}
+                                </strong>
+
+                                <small>
+                                    {{ event.category.name }}
+                                </small>
+
+                            </td>
+
+
+                            <td>
+
+                                {{ event.event_date|date:"M d, Y" }}
+
+                            </td>
+
+
+                            <td>
+
+                                <span class="
+                                    table-status
+                                    status-{{ event.status }}">
+
+                                    {{ event.get_status_display }}
+
+                                </span>
+
+                            </td>
+
+
+                            <td>
+
+                                {{ event.spots_left }}/{{ event.capacity }}
+
+                            </td>
+
+
+                            <td>
+
+                                <a
+                                    href="{% url 'event_detail' event.slug %}"
+                                    class="table-link">
+
+                                    View
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% empty %}
+
+
+                        <tr>
+
+                            <td colspan="5">
+
+                                No events created yet.
+
+                            </td>
+
+                        </tr>
+
+
+                    {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RECENT REGISTRATIONS -->
+
+        <div class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ATTENDEES
+                    </span>
+
+                    <h2>
+                        Recent Registrations
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="registration-mini-list">
+
+
+                {% for registration in recent_registrations %}
+
+
+                <div class="registration-mini">
+
+
+                    <div class="avatar-circle">
+
+                        {{ registration.attendee.username|first|upper }}
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            {{ registration.attendee.get_full_name|default:registration.attendee.username }}
+                        </strong>
+
+                        <span>
+
+                            registered for
+                            {{ registration.event.title }}
+
+                        </span>
+
+                    </div>
+
+
+                    <small>
+
+                        {{ registration.registered_at|timesince }}
+                        ago
+
+                    </small>
+
+
+                </div>
+
+
+                {% empty %}
+
+
+                <div class="dashboard-empty">
+
+                    <span>
+                        👥
+                    </span>
+
+                    <h3>
+                        No registrations yet
+                    </h3>
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}
